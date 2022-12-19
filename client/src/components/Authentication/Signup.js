@@ -82,7 +82,7 @@ const Signup = () => {
         style={{marginTop: 15}}
         onClick={submitHandler}
       >
-        Sign UP
+        Sign Up
       </Button>
     </VStack>
   );
