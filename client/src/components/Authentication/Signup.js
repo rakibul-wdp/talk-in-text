@@ -102,7 +102,7 @@ const Signup = () => {
       localStorage.setItem('userInfo', JSON.stringify(data));
 
       setLoading(false);
-      navigate.pushState('/chats');
+      navigate('/chats');
     } catch (error) {
       toast({
         title: "Error occurred...!!!",
