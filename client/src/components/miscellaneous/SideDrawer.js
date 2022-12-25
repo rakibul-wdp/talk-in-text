@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChatState } from '../../Context/ChatProvider';
+import ProfileModal from './ProfileModal';
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -153,9 +154,9 @@ const SideDrawer = () => {
               />
             </MenuButton>
             <MenuList>
-              {/* <ProfileModal user={user}> */}
+              <ProfileModal user={user}>
                 <MenuItem>My Profile</MenuItem>
-              {/* </ProfileModal> */}
+              </ProfileModal>
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
