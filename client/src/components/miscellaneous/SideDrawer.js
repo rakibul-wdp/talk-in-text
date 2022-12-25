@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChatState } from '../../Context/ChatProvider';
 import ChatLoading from '../ChatLoading';
+import UserListItem from '../userAvatar/UserListItem';
 import ProfileModal from './ProfileModal';
 
 const SideDrawer = () => {
