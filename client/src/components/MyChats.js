@@ -6,6 +6,7 @@ import {
 } from "@chakra-ui/react";
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
+import { getSender } from "../config/ChatLogics";
 import { ChatState } from '../Context/ChatProvider';
 import ChatLoading from "./ChatLoading";
 
@@ -76,7 +77,7 @@ const MyChats = () => {
         {/* </GroupChatModal> */}
       </Box>
       <Box
-        d="flex"
+        display="flex"
         flexDir="column"
         p={3}
         bg="#F8F8F8"
@@ -99,9 +100,9 @@ const MyChats = () => {
                 key={chat._id}
               >
                 <Text>
-                  {/* {!chat.isGroupChat
+                  {!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
-                    : chat.chatName} */}
+                    : chat.chatName}
                 </Text>
                 {chat.latestMessage && (
                   <Text fontSize="xs">
