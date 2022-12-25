@@ -1,4 +1,4 @@
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import {
   Box,
   FormControl,
@@ -9,11 +9,13 @@ import {
   useToast
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useState } from "react";
-import { getSender, getSenderFull } from '../config/ChatLogics';
+import React, { useEffect, useState } from "react";
+import { getSender, getSenderFull } from "../config/ChatLogics";
 import { ChatState } from "../Context/ChatProvider";
-import ProfileModal from './miscellaneous/ProfileModal';
+import "../css/styles.css";
+import ProfileModal from "./miscellaneous/ProfileModal";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
+import ScrollableChat from "./ScrollableChat";
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
@@ -54,22 +56,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setMessages(data);
       setLoading(false);
 
-      socket.emit("join chat", selectedChat._id);
+      // socket.emit("join chat", selectedChat._id);
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error Occurred!",
         description: "Failed to Load the Messages",
         status: "error",
         duration: 5000,
         isClosable: true,
-        position: "bottom",
       });
     }
   };
 
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
-      socket.emit("stop typing", selectedChat._id);
+      // socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
           headers: {
@@ -86,74 +87,70 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-        socket.emit("new message", data);
+        // socket.emit("new message", data);
         setMessages([...messages, data]);
       } catch (error) {
         toast({
-          title: "Error Occured!",
+          title: "Error Occurred!",
           description: "Failed to send the Message",
           status: "error",
           duration: 5000,
           isClosable: true,
-          position: "bottom",
         });
       }
     }
   };
 
-  useEffect(() => {
-    socket = io(ENDPOINT);
-    socket.emit("setup", user);
-    socket.on("connected", () => setSocketConnected(true));
-    socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false));
-
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   socket = io(ENDPOINT);
+  //   socket.emit("setup", user);
+  //   socket.on("connected", () => setSocketConnected(true));
+  //   socket.on("typing", () => setIsTyping(true));
+  //   socket.on("stop typing", () => setIsTyping(false));
+  // }, []);
 
   useEffect(() => {
     fetchMessages();
 
-    selectedChatCompare = selectedChat;
-    // eslint-disable-next-line
+    // selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  // useEffect(() => {
-  //   socket.on("message recieved", (newMessageRecieved) => {
-  //     if (
-  //       !selectedChatCompare || // if chat is not selected or doesn't match current chat
-  //       selectedChatCompare._id !== newMessageRecieved.chat._id
-  //     ) {
-  //       if (!notification.includes(newMessageRecieved)) {
-  //         setNotification([newMessageRecieved, ...notification]);
-  //         setFetchAgain(!fetchAgain);
-  //       }
-  //     } else {
-  //       setMessages([...messages, newMessageRecieved]);
-  //     }
-  //   });
-  // });
+  useEffect(() => {
+    // socket.on("message recieved", (newMessageRecieved) => {
+    //   if (
+    //     !selectedChatCompare || // if chat is not selected or doesn't match current chat
+    //     selectedChatCompare._id !== newMessageRecieved.chat._id
+    //   ) {
+    //     if (!notification.includes(newMessageRecieved)) {
+    //       setNotification([newMessageRecieved, ...notification]);
+    //       setFetchAgain(!fetchAgain);
+    //     }
+    //   } else {
+    //     setMessages([...messages, newMessageRecieved]);
+    //   }
+    // });
+  });
 
-  // const typingHandler = (e) => {
-  //   setNewMessage(e.target.value);
+  const typingHandler = (e) => {
+    setNewMessage(e.target.value);
 
-  //   if (!socketConnected) return;
+    if (!socketConnected) return;
 
-  //   if (!typing) {
-  //     setTyping(true);
-  //     socket.emit("typing", selectedChat._id);
-  //   }
-  //   let lastTypingTime = new Date().getTime();
-  //   var timerLength = 3000;
-  //   setTimeout(() => {
-  //     var timeNow = new Date().getTime();
-  //     var timeDiff = timeNow - lastTypingTime;
-  //     if (timeDiff >= timerLength && typing) {
-  //       socket.emit("stop typing", selectedChat._id);
-  //       setTyping(false);
-  //     }
-  //   }, timerLength);
-  // };
+    // if (!typing) {
+    //   setTyping(true);
+    //   socket.emit("typing", selectedChat._id);
+    // }
+    // let lastTypingTime = new Date().getTime();
+    // var timerLength = 3000;
+    // setTimeout(() => {
+    //   var timeNow = new Date().getTime();
+    //   var timeDiff = timeNow - lastTypingTime;
+    //   if (timeDiff >= timerLength && typing) {
+    //     socket.emit("stop typing", selectedChat._id);
+    //     setTyping(false);
+    //   }
+    // }, timerLength);
+  };
 
   return (
     <>
@@ -226,12 +223,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             >
               {isTyping ? (
                 <div>
-                  <Lottie
+                  {/* <Lottie
                     options={defaultOptions}
                     // height={50}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
-                  />
+                  /> */}
                 </div>
               ) : (
                 <></>
