@@ -1,6 +1,8 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
+import ChatBox from "../components/ChatBox";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
+import MyChats from "../components/MyChats";
 import { ChatState } from "../Context/ChatProvider";
 
 const ChatPage = () => {
@@ -8,10 +10,10 @@ const ChatPage = () => {
 
   return (
     <div style={{ width: "100%" }}>
-      {user && <SideDrawer/>}
+      {user && <SideDrawer />}
       <Box>
-        {/* {user && <MyChats/>} */}
-        {/* {user && <ChatBox/>} */}
+        {user && <MyChats />}
+        {user && <ChatBox />}
       </Box>
     </div>
   );
