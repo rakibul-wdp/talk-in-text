@@ -50,7 +50,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://talk-in-text.onrender.com",
+    origin: "/client/build/index.html",
     // credentials: true,
   },
 });
