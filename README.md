@@ -1,4 +1,4 @@
-# Talk in Text - Chat Application with MERN Stack. [Live Site](https://talk-in-text.onrender.com)
+# Talk in Text - Chat Application - MERN Stack. [Live Site](https://talk-in-text.onrender.com)
 ## Feature & Description
 * Talk-in-Text is a Full Stack Chatting App. Uses Socket.io for real time communication and stores user details in encrypted format in Mongo DB Database.
 * Authentic users can communicate one to one and also in group chat with awesome user experience.
